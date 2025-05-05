@@ -38,13 +38,13 @@ jobs:
       }
       Start-Sleep -Seconds 10
   
-  - name: Hiển thị thông tin RDP
-    run: |
-      $tunnel = Invoke-RestMethod -Uri http://127.0.0.1:4040/api/tunnels
-      $rdp = ($tunnel.tunnels | Where-Object { $_.proto -eq "tcp" }).public_url
-      Write-Output "🌐 Ngrok RDP: $rdp"
-      Write-Output "👤 User: runneradmin"
-      Write-Output "🔑 Password: P@ssw0rd!"
+    - name: Hiển thị thông tin RDP
+      run: |
+        $tunnel = Invoke-RestMethod -Uri http://127.0.0.1:4040/api/tunnels
+        $rdp = ($tunnel.tunnels | Where-Object { $_.proto -eq "tcp" }).public_url
+        Write-Output "🌐 Ngrok RDP: $rdp"
+        Write-Output "👤 User: runneradmin"
+        Write-Output "🔑 Password: P@ssw0rd!"
 
     - name: Giữ phiên hoạt động 6 giờ
       run: Start-Sleep -Seconds 21600
