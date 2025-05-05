@@ -14,9 +14,9 @@ jobs:
     timeout-minutes: 360
 
     steps:
-    - name: Tải ngrok v3
+    - name: Tải ngrok v3.7.0
       run: |
-        Invoke-WebRequest -Uri "https://ngrok-agent.s3.amazonaws.com/ngrok-stable-windows-amd64.zip" -OutFile "ngrok.zip"
+        Invoke-WebRequest -Uri "https://bin.ngrok.com/ngrok-v3-stable-windows-amd64.zip" -OutFile "ngrok.zip"
         Expand-Archive ngrok.zip -DestinationPath "$env:USERPROFILE\ngrok"
         $env:Path += ";$env:USERPROFILE\ngrok"
         cd $env:USERPROFILE\ngrok
