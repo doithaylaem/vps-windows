@@ -20,7 +20,8 @@ jobs:
         Expand-Archive ngrok.zip -DestinationPath "$env:USERPROFILE\ngrok"
 
     - name: Cấu hình ngrok authtoken
-      run: "$env:USERPROFILE\ngrok\ngrok.exe config add-authtoken $env:NGROK_AUTH_TOKEN"
+      run: |
+        & "$env:USERPROFILE\ngrok\ngrok.exe" config add-authtoken $env:NGROK_AUTH_TOKEN
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
 
