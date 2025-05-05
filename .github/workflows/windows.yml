@@ -33,10 +33,10 @@ jobs:
 
     - name: Khởi động ngrok tunnel và ghi log
       run: |
-        Start-Job -ScriptBlock {
-          & "$env:USERPROFILE\ngrok\ngrok.exe" tcp 3389 --log=stdout
-        } | Tee-Object -FilePath ngrok_log.txt | Out-Null
-        Start-Sleep -Seconds 15
+        Start-Process -FilePath "$env:USERPROFILE\ngrok\ngrok.exe" `
+          -ArgumentList "tcp 3389 --log=ngrok_log.txt" `
+          -WindowStyle Hidden
+        Start-Sleep -Seconds 30
 
     - name: Hiển thị thông tin RDP
       run: |
