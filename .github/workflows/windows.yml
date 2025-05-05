@@ -14,12 +14,9 @@ jobs:
     timeout-minutes: 360
 
     steps:
-    - name: Tải ngrok v3 từ SourceForge
+    - name: Tải ngrok 3.7.0 từ GitHub (host phụ trợ)
       run: |
-        Invoke-WebRequest -Uri "https://downloads.sourceforge.net/project/ngrok/ngrok-v3-stable-windows-amd64.zip" -OutFile "ngrok.zip"
-        Expand-Archive ngrok.zip -DestinationPath "$env:USERPROFILE\ngrok"
-        $env:Path += ";$env:USERPROFILE\ngrok"
-        cd $env:USERPROFILE\ngrok
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/hpthanhng/host-ngrok/main/ngrok.exe" -OutFile "ngrok.exe"
 
     - name: Cấu hình ngrok authtoken
       run: .\ngrok.exe config add-authtoken $env:NGROK_AUTH_TOKEN
