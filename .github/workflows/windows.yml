@@ -18,11 +18,9 @@ jobs:
       run: |
         curl.exe -L -o ngrok.zip https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip
         Expand-Archive ngrok.zip -DestinationPath "$env:USERPROFILE\ngrok"
-        $env:Path += ";$env:USERPROFILE\ngrok"
-        cd $env:USERPROFILE\ngrok
 
     - name: Cấu hình ngrok authtoken
-      run: .\ngrok.exe config add-authtoken $env:NGROK_AUTH_TOKEN
+      run: "$env:USERPROFILE\ngrok\ngrok.exe config add-authtoken $env:NGROK_AUTH_TOKEN"
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
 
@@ -33,7 +31,7 @@ jobs:
         Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
 
     - name: Khởi động ngrok tunnel
-      run: Start-Process -NoNewWindow -FilePath .\ngrok.exe -ArgumentList "tcp 3389"
+      run: Start-Process -NoNewWindow -FilePath "$env:USERPROFILE\ngrok\ngrok.exe" -ArgumentList "tcp 3389"
 
     - name: Hiển thị thông tin RDP
       run: |
