@@ -31,13 +31,13 @@ jobs:
         Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
         Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
 
-     - name: Khởi động ngrok tunnel
-    run: |
-      Start-Job -ScriptBlock {
-        & "$env:USERPROFILE\ngrok\ngrok.exe" tcp 3389
-      }
-      Start-Sleep -Seconds 10
-  
+    - name: Khởi động ngrok tunnel
+      run: |
+        Start-Job -ScriptBlock {
+          & "$env:USERPROFILE\ngrok\ngrok.exe" tcp 3389
+        }
+        Start-Sleep -Seconds 10
+
     - name: Hiển thị thông tin RDP
       run: |
         $tunnel = Invoke-RestMethod -Uri http://127.0.0.1:4040/api/tunnels
